@@ -1,0 +1,48 @@
+body {
+}
+div {
+    text-align: center;
+    margin-left: auto;
+    margin-right: auto;
+}
+a {
+    text-decoration: none;
+    color: black;
+}
+
+.button_list li {
+    list-style: none;
+    border: 1px solid black;
+    margin: 5px;
+    padding: 0;
+    border-radius: 8px;
+    -moz-border-radius: 8px;
+}
+.button_list li a {
+    padding: 5px;
+    display: block;
+}
+.button_list li a:hover {
+    padding: 5px;
+    display: block;
+    background: #FFFF99;
+    color: red;
+}
+.button_list li a:active {
+    padding: 5px;
+    display: block;
+    background: #FFFF00;
+    color: red;
+}
+
+.results li {
+    list-style: none;
+}
+.results a {
+    color: blue;
+    padding: 5px;
+}
+.results a:active {
+    background: blue;
+    color: white;
+}
