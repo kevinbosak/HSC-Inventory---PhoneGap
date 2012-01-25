@@ -30,13 +30,12 @@ function HSCInventory(args) {
     self.search_params = {};
 
     // scan button
-    $('#header .button_list a[href="#scan"]').click(function() {
+    $('#scan_btn').click(function() {
         // TODO: also allow pulling from photo album:
         // Camera.sourceType = Camera.PictureSourceType.PHOTOLIBRARY
         alert('Getting picture');
         
-        if (Camera) {
-        Camera.getPicture(
+        navigator.camera.getPicture(
             function(data) {return this.cameraSuccess(data);},
             function(data) {return this.cameraError(data);},
             {
@@ -46,7 +45,6 @@ function HSCInventory(args) {
                 destinationType: Camera.DestinationType.DATA_URL,  
                 sourceType:      Camera.PictureSourceType.CAMERA
         });
-        }
     });
 
     // set up live event for items in results list
