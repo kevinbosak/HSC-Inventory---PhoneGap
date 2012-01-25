@@ -1,11 +1,13 @@
 function HSCInventory(args) {
     var self = this;
 
-    if (navigator.network.connection.type == Connection.NONE) {
+    if (navigator && navigator.network && navigator.network.connection.type == Connection.NONE) {
         // TODO: check for connectivity later, setTimeout?
         //     or allow user to manually re-check 
         alert("No internet connection - starting in offline mode");
     }
+    // FIXME: only for debugging, remove later on
+    alert('Version .004');
 
     self.api_url = 'http://hsc.bosak.net/api/';
     if (!self.api_url) {
@@ -30,11 +32,12 @@ function HSCInventory(args) {
     self.search_params = {};
 
     // scan button
-    $('#scan_btn').click(function() {
+    $('#scan_btn').click(function(e) {
         // TODO: also allow pulling from photo album:
         // Camera.sourceType = Camera.PictureSourceType.PHOTOLIBRARY
         alert('Getting picture');
         
+        if (navigator && navigator.camera) {
         navigator.camera.getPicture(
             function(data) {return this.cameraSuccess(data);},
             function(data) {return this.cameraError(data);},
@@ -45,6 +48,8 @@ function HSCInventory(args) {
                 destinationType: Camera.DestinationType.DATA_URL,  
                 sourceType:      Camera.PictureSourceType.CAMERA
         });
+        }
+        return false;
     });
 
     // set up live event for items in results list
@@ -52,6 +57,7 @@ function HSCInventory(args) {
         var $a = $(this);
         var href = $a.attr('href');
         alert(href);
+        return false;
     });
 
     // hide all pages
@@ -110,7 +116,7 @@ HSCInventory.prototype.get_item_list = function(page) {
             // TODO: pagination
             var $results = $results_page.find('.results ul').empty();
             $.each(data.data, function(i, item) {
-                $results.append('<li><a href="#' + item.inventory_id + '">' + item.name + '</a> - ' + item.description + '</li>');
+                $results.append('<li><a href="' + item.uri + '">' + item.name + '</a> - ' + item.description + '</li>');
             });
             self.display_page('search');
         }
