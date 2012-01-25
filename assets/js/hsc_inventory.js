@@ -33,10 +33,12 @@ function HSCInventory(args) {
     $('#header .button_list a[href="#scan"]').click(function() {
         // TODO: also allow pulling from photo album:
         // Camera.sourceType = Camera.PictureSourceType.PHOTOLIBRARY
+        alert('Getting picture');
         
-        var picture = camera.getPicture(
-            function() {return this.cameraSuccess();},
-            function() {return this.cameraError();},
+        if (Camera) {
+        Camera.getPicture(
+            function(data) {return this.cameraSuccess(data);},
+            function(data) {return this.cameraError(data);},
             {
                 quality:         75,  // some iOS devices give memory error for 50 and over
 //            encodingType:    Camera.EncodingType.JPEG,  // or PNG
@@ -44,7 +46,7 @@ function HSCInventory(args) {
                 destinationType: Camera.DestinationType.DATA_URL,  
                 sourceType:      Camera.PictureSourceType.CAMERA
         });
-        alert("Got picture of size: " + picture.length);
+        }
     });
 
     // set up live event for items in results list
@@ -57,6 +59,11 @@ function HSCInventory(args) {
     // hide all pages
     self.get_item_list();
 }
+
+HSCInventory.prototype.cameraSuccess = function(imageData) {
+    var self = this;
+    alert("Got picture of size: " + imageData.length);
+};
 
 HSCInventory.prototype.display_page = function(page_id) {
     var self = this;
