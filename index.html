@@ -5,7 +5,10 @@
     <link rel="stylesheet" href="assets/css/main.css"/>
     <script type="text/javascript" src="assets/js/hsc_inventory.js"></script>
     <script type="text/javascript">
-        var inventory = new HSCInventory();
+        var inventory;
+        $('document').ready(function() {
+            inventory = new HSCInventory();
+        });
     </script>
 
     <title>HSC Inventory</title>
