@@ -34,12 +34,15 @@ function HSCInventory(args) {
         // TODO: also allow pulling from photo album:
         // Camera.sourceType = Camera.PictureSourceType.PHOTOLIBRARY
         
-        var picture = camera.getPicture(cameraSuccess, cameraError, {
-            quality:         75,  // some iOS devices give memory error for 50 and over
+        var picture = camera.getPicture(
+            function() {return this.cameraSuccess();},
+            function() {return this.cameraError();},
+            {
+                quality:         75,  // some iOS devices give memory error for 50 and over
 //            encodingType:    Camera.EncodingType.JPEG,  // or PNG
 //            targetWidth:    400,   // pixels
-            destinationType: Camera.DestinationType.DATA_URL,  
-            sourceType:      Camera.PictureSourceType.CAMERA
+                destinationType: Camera.DestinationType.DATA_URL,  
+                sourceType:      Camera.PictureSourceType.CAMERA
         });
         alert("Got picture of size: " + picture.length);
     });
