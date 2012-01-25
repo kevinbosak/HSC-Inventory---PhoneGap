@@ -1,6 +1,12 @@
 function HSCInventory(args) {
     var self = this;
 
+    if (navigator.network.connection.type == Connection.NONE) {
+        // TODO: check for connectivity later, setTimeout?
+        //     or allow user to manually re-check 
+        alert("No internet connection - starting in offline mode");
+    }
+
     self.api_url = 'http://hsc.bosak.net/api/';
     if (!self.api_url) {
         self.api_url = args.api_url;
@@ -22,6 +28,21 @@ function HSCInventory(args) {
     self.total_pages = 1;
     self.search_results = []; // ID's only?
     self.search_params = {};
+
+    // scan button
+    $('#header .button_list a[href="#scan"]').click(function() {
+        // TODO: also allow pulling from photo album:
+        // Camera.sourceType = Camera.PictureSourceType.PHOTOLIBRARY
+        
+        var picture = camera.getPicture(cameraSuccess, cameraError, {
+            quality:         75,  // some iOS devices give memory error for 50 and over
+//            encodingType:    Camera.EncodingType.JPEG,  // or PNG
+//            targetWidth:    400,   // pixels
+            destinationType: Camera.DestinationType.DATA_URL,  
+            sourceType:      Camera.PictureSourceType.CAMERA
+        });
+        alert("Got picture of size: " + picture.length);
+    });
 
     // set up live event for items in results list
     $('.results a').live('click', function() {
