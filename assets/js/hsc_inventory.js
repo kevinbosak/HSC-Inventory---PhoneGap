@@ -67,7 +67,7 @@ HSCInventory.prototype.cameraSuccess = function(imageData) {
     $('#scan_result div').html(
             self.current_scan = $(document.createElement('img'))
                 .attr('src', "data:image/jpeg;base64," + imageData))
-                .attr('width', '300')
+                .attr('width', '300');
             var canvas = self.current_scan.pixastic('edges');
     self.display_page('scan_result');
 };
