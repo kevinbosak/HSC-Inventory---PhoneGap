@@ -28,6 +28,7 @@ function HSCInventory(args) {
     self.total_pages = 1;
     self.search_results = []; // ID's only?
     self.search_params = {};
+    self.current_scan = null;
 
     // scan button
     $('#scan_btn').click(function(e) {
@@ -64,10 +65,10 @@ function HSCInventory(args) {
 HSCInventory.prototype.cameraSuccess = function(imageData) {
     var self = this;
     $('#scan_result div').html(
-            var img = $(document.createElement('img'))
+            self.current_scan = $(document.createElement('img'))
                 .attr('src', "data:image/jpeg;base64," + imageData))
                 .attr('width', '300')
-            var canvas = img.pixastic('edges');
+            var canvas = self.current_scan.pixastic('edges');
     self.display_page('scan_result');
 };
 
