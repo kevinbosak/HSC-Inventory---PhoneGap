@@ -6,8 +6,6 @@ function HSCInventory(args) {
         //     or allow user to manually re-check 
         alert("No internet connection - starting in offline mode");
     }
-    // FIXME: only for debugging, remove later on
-    alert('Version .004');
 
     self.api_url = 'http://hsc.bosak.net/api/';
     if (!self.api_url) {
@@ -35,7 +33,6 @@ function HSCInventory(args) {
     $('#scan_btn').click(function(e) {
         // TODO: also allow pulling from photo album:
         // Camera.sourceType = Camera.PictureSourceType.PHOTOLIBRARY
-        alert('Getting picture');
         
         if (navigator && navigator.camera) {
             navigator.camera.getPicture(
@@ -67,9 +64,10 @@ function HSCInventory(args) {
 HSCInventory.prototype.cameraSuccess = function(imageData) {
     var self = this;
     $('#scan_result div').html(
-            $(document.createElement('img'))
+            var img = $(document.createElement('img'))
                 .attr('src', "data:image/jpeg;base64," + imageData))
-                .attr('width', '300').pixastic('edges', {mono: true});
+                .attr('width', '300')
+            var canvas = img.pixastic('edges');
     self.display_page('scan_result');
 };
 
