@@ -66,7 +66,7 @@ function HSCInventory(args) {
 
 HSCInventory.prototype.cameraSuccess = function(imageData) {
     var self = this;
-    $('#scan_result div').html($(document.createElement('a')).attr('href', imageData));
+    $('#scan_result div').html($(document.createElement('img')).attr('src', imageData)).attr('width', '300');
     self.display_page('scan_result');
 };
 
