@@ -39,8 +39,8 @@ function HSCInventory(args) {
         
         if (navigator && navigator.camera) {
         navigator.camera.getPicture(
-            function(data) {return this.cameraSuccess(data);},
-            function(data) {return this.cameraError(data);},
+            function(data) {return self.cameraSuccess(data);},
+            function(data) {return self.cameraError(data);},
             {
                 quality:         75,  // some iOS devices give memory error for 50 and over
 //            encodingType:    Camera.EncodingType.JPEG,  // or PNG
@@ -66,7 +66,11 @@ function HSCInventory(args) {
 
 HSCInventory.prototype.cameraSuccess = function(imageData) {
     var self = this;
-    alert("Got picture of size: " + imageData.length);
+    alert("Picture URL: " + imageData);
+};
+
+HSCInventory.prototype.cameraError = function(imageData) {
+    alert("Error obtaining the picture");
 };
 
 HSCInventory.prototype.display_page = function(page_id) {
