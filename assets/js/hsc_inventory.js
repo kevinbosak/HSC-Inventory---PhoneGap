@@ -38,16 +38,16 @@ function HSCInventory(args) {
         alert('Getting picture');
         
         if (navigator && navigator.camera) {
-        navigator.camera.getPicture(
-            function(data) {return self.cameraSuccess(data);},
-            function(data) {return self.cameraError(data);},
-            {
-                quality:         75,  // some iOS devices give memory error for 50 and over
+            navigator.camera.getPicture(
+                function(data) {return self.cameraSuccess(data);},
+                function(data) {return self.cameraError(data);},
+                {
+                    quality:         75,  // some iOS devices give memory error for 50 and over
 //            encodingType:    Camera.EncodingType.JPEG,  // or PNG
 //            targetWidth:    400,   // pixels
-                destinationType: Camera.DestinationType.DATA_URL,  
-                sourceType:      Camera.PictureSourceType.CAMERA
-        });
+                    destinationType: Camera.DestinationType.DATA_URL,  
+                    sourceType:      Camera.PictureSourceType.CAMERA
+            });
         }
         return false;
     });
@@ -66,7 +66,10 @@ function HSCInventory(args) {
 
 HSCInventory.prototype.cameraSuccess = function(imageData) {
     var self = this;
-    $('#scan_result div').html($(document.createElement('img')).attr('src', imageData)).attr('width', '300');
+    $('#scan_result div').html(
+            $(document.createElement('img'))
+                .attr('src', "data:image/jpeg;base64," + imageData))
+                .attr('width', '300').pixastic('edges', {mono: true});
     self.display_page('scan_result');
 };
 
