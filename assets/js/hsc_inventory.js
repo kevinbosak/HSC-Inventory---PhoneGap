@@ -66,7 +66,8 @@ function HSCInventory(args) {
 
 HSCInventory.prototype.cameraSuccess = function(imageData) {
     var self = this;
-    alert("Picture URL: " + imageData);
+    $('#scan_result div').html($(document.createElement('a')).attr('href', imageData));
+    self.display_page('scan_result');
 };
 
 HSCInventory.prototype.cameraError = function(imageData) {
