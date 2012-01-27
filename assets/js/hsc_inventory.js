@@ -44,7 +44,7 @@ function HSCInventory(args) {
                 {
                     quality:         75,  // some iOS devices give memory error for 50 and over
 //            encodingType:    Camera.EncodingType.JPEG,  // or PNG
-//            targetWidth:    400,   // pixels
+            targetWidth:    300,   // pixels
                     destinationType: Camera.DestinationType.DATA_URL,  
                     sourceType:      Camera.PictureSourceType.CAMERA
             });
