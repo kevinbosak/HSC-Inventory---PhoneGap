@@ -64,14 +64,10 @@ function HSCInventory(args) {
 
 HSCInventory.prototype.cameraSuccess = function(imageData) {
     var self = this;
-    self.current_scan = $(document.createElement('img'));
-    self.current_scan.attr('src', "data:image/jpeg;base64," + imageData).attr('width', '300').attr('id', 'current_scan');
-    $('#scan_result div').empty().append(self.current_scan);
-    alert(getBarcodeFromImage('current_scan'));
-/*
     self.display_page('scan_result');
-    $('#scan_result img').pixastic('edges', {mono: true});
-*/
+    self.current_scan = $(document.createElement('img'));
+    $('#scan_result div').empty().append(self.current_scan);
+    self.current_scan.attr('src', "data:image/jpeg;base64," + imageData).attr('width', '300').attr('id', 'current_scan').pixastic('brightness', {brightness: 0, contrast: 3}).pixastic('desaturate');
 };
 
     HSCInventory.prototype.cameraError = function(imageData) {
