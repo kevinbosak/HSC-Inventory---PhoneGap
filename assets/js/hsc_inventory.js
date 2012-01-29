@@ -68,8 +68,7 @@ HSCInventory.prototype.cameraSuccess = function(imageData) {
     self.current_scan = $(document.createElement('img'));
     $('#scan_result div').empty().append(self.current_scan);
     self.current_scan.attr('src', "data:image/jpeg;base64," + imageData).attr('width', '300').attr('id', 'current_scan').load(function() {
-        alert('processing image');
-        $(this).pixastic('brightness', {brightness: 0, contrast: 3}).pixastic('desaturate');
+        $(this).pixastic('brightness', {brightness: 10, contrast: 20}).pixastic('desaturate');
     });
 };
 
